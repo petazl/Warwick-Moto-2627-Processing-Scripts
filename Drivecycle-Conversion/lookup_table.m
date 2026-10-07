@@ -54,36 +54,36 @@ writetable(lookupTable, 'TorqueVoltageLookup.csv');
 
 %% 6. Plot 3D torque lookup surface
 
-% X = RPM
-% Y = voltage
-% Z = mean torque
-
-[RPM_GRID, VOLTAGE_GRID] = meshgrid(rpm, voltage);
-
-TORQUE_GRID = torqueMatrix';
-
-fig3D = figure('Color','w', ...
-               'Name','3D Torque Voltage Lookup');
-
-surf(RPM_GRID, VOLTAGE_GRID, TORQUE_GRID, ...
-    'EdgeColor', 'none');
-
-xlabel('RPM');
-ylabel('Voltage command (V)');
-zlabel('Mean torque (Nm)');
-title('3D Torque Lookup');
-
-colorbar;
-grid on;
-box on;
-view(45, 30);
-
-exportgraphics(fig3D, 'TorqueVoltageLookup_3D.png', ...
-    'Resolution', 300);
+% % X = RPM
+% % Y = voltage
+% % Z = mean torque
+% 
+% [RPM_GRID, VOLTAGE_GRID] = meshgrid(rpm, voltage);
+% 
+% TORQUE_GRID = torqueMatrix';
+% 
+% fig3D = figure('Color','w', ...
+%                'Name','3D Torque Voltage Lookup');
+% 
+% surf(RPM_GRID, VOLTAGE_GRID, TORQUE_GRID, ...
+%     'EdgeColor', 'none');
+% 
+% xlabel('RPM');
+% ylabel('Voltage command (V)');
+% zlabel('Mean torque (Nm)');
+% title('3D Torque Lookup');
+% 
+% colorbar;
+% grid on;
+% box on;
+% view(45, 30);
+% 
+% exportgraphics(fig3D, 'TorqueVoltageLookup_3D.png', ...
+%     'Resolution', 300);
 
 %% 7. Load drive cycle
 
-drivecycle = RaceDataDriveCycleUnscaled;
+drivecycle = DriveCycleOL;
 
 driveRPM = drivecycle.EVO1UserMotorRPMDriveCycle;
 driveTorque = drivecycle.EVO1UserTorqueDriveCycle;
@@ -251,6 +251,8 @@ hold on;
 
 plot(driveTime, clampedTorque, ...
     '--', 'LineWidth', 1.2);
+
+hold on;
 
 xlabel('Time');
 ylabel('Torque (Nm)');
